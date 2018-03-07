@@ -20,6 +20,9 @@ public class Enemy extends Item{
     private static int direction;
     private boolean front; // Determines if the enemy can shoot
     private int type; // Represents the shape of the enemy
+    private Animation animationEnemy;
+    private Animation animationEnemy2;
+    private Animation animationEnemy3;
     
     /**
      * Constructor of the enemy
@@ -30,11 +33,16 @@ public class Enemy extends Item{
      * @param score the amount of times it has to be hit to be destroyed
      * @param game the reference to the game
      */
-    public Enemy(int x, int y, int width, int height, int score, Game game) {
+    public Enemy(int x, int y, int width, int height, int score, int type,  Game game) {
         super(x, y, width, height);
-        game = game;
-        score = score;
         front = false;
+        this.game = game;
+        this.score = score;
+        this.type = type;
+        this.animationEnemy = new Animation(Assets.enemyCut, 800);
+        this.animationEnemy2 = new Animation(Assets.enemyCut2, 800);
+        this.animationEnemy3 = new Animation(Assets.enemyCut3, 800);
+
     }
 
     /**
@@ -52,6 +60,16 @@ public class Enemy extends Item{
     public boolean isFront() {
         return front;
     }
+    
+    
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
    
     public static int getDirection() {
         return direction;
@@ -82,6 +100,8 @@ public class Enemy extends Item{
      */
     @Override
     public void tick() {
+        this.animationEnemy.tick();
+
         if(getDirection() == 0){
             setY(getY() + 10);
         }
@@ -96,15 +116,32 @@ public class Enemy extends Item{
      */
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect(getX(), getY(), getWidth(), getHeight());
+        
+        switch (this.getType()) {
+            case 1:
+                g.drawImage(animationEnemy.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case 2:
+                g.drawImage(animationEnemy2.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case 3:
+                g.drawImage(animationEnemy3.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            default:
+                break;
+                
+        //g.setColor(Color.blue);
+        //g.fillRect(getX(), getY(), getWidth(), getHeight());
         /*
         if(this.getPower()==3){
-            g.drawImage(Assets.brick1, getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(Assets.brick1, getX(), getY(), getWidth(), getHeight(), null);
         }else if (this.getPower() == 2){
-            g.drawImage(Assets.brick2, getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(Assets.brick2, getX(), getY(), getWidth(), getHeight(), null);
         }else if (this.getPower() == 1){
-            g.drawImage(Assets.brick3, getX(), getY(), getWidth(), getHeight(), null);            
+        g.drawImage(Assets.brick3, getX(), getY(), getWidth(), getHeight(), null);            
         }*/
+
+                
+        }
     }
 }

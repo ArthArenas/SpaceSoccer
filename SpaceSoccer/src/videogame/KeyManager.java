@@ -20,7 +20,6 @@ public class KeyManager implements KeyListener {
     private boolean pause;
     private boolean pauseEnabled;
     private boolean restart;
-    
     private boolean keys[];  // to store all the flags for every key
     
     /**
@@ -76,9 +75,11 @@ public class KeyManager implements KeyListener {
             }
         }
         else{
+            // set true to every key pressed
             keys[e.getKeyCode()] = true;
         }
     }
+    
 
     /**
      * Event of releasing a key
@@ -90,7 +91,7 @@ public class KeyManager implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_P){
             pauseEnabled = true;
         }
-        keys[e.getKeyCode()] = false;
+            keys[e.getKeyCode()] = false;
     }
     
     /**

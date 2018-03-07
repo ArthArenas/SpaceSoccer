@@ -146,7 +146,7 @@ public class Game implements Runnable {
          for (int i = 0; i < 10; i++) {
              for (int j = 0; j < 5; j++) {
                  Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 , 
-                         j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, this);
+                         j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 1, this);
                  enemies.add(enemy);
              }
          }
@@ -216,8 +216,6 @@ public class Game implements Runnable {
             paused = !paused;
         }
         if(!paused){
-            // ticking the player
-            //player.tick();
             // ticking the enemies
             player.tick();
             // get the left-most and right-most positions of the enemies
@@ -247,6 +245,10 @@ public class Game implements Runnable {
             // tick the enemies
             for(int i = 0; i < enemies.size(); i++){
                 enemies.get(i).tick();
+            }
+            if (this.getKeyManager().space) {
+                bullets.add(new Bullet(this.player.getX() + this.player.getWidth() / 2 - 10,
+                    this.player.getY()-200, 20, 20, false, this));
             }
             // ticking the bullets
             for(int i = 0; i < bullets.size(); i++){
@@ -322,7 +324,7 @@ public class Game implements Runnable {
             // render the elements of the game
             if(running){
                 if(paused){
-                    // g.drawImage(Assets.pauseBackground, 0, 0, width, height, null);
+                     g.drawImage(Assets.pauseBackground, 0, 0, width, height, null);
                 }
                 else{
                     g.drawImage(Assets.background, 0, 0, width, height, null);

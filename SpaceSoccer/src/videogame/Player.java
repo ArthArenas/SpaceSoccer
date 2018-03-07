@@ -16,7 +16,7 @@ import java.awt.Graphics;
 public class Player extends Item{
 
     private Game game;  // Reference to the game
-    private Animation animationball;
+    private Animation animationPlayer;
 
     
     /**
@@ -30,7 +30,7 @@ public class Player extends Item{
     public Player(int x, int y, int width, int height, Game game) {
         super(x, y, width, height);
         this.game = game;
-        this.animationball = new Animation(Assets.moveBall, 100);
+        this.animationPlayer = new Animation(Assets.playerCut, 300);
 
     }
 
@@ -38,9 +38,8 @@ public class Player extends Item{
      * Update the sttributes of the bar
      */
     @Override
-    public void tick() {
-        
-        this.animationball.tick();
+    public void tick() {  
+        this.animationPlayer.tick();
         // moving bar depending on keys <-  ->
         if (game.getKeyManager().left) {
            setX(getX() - 6);
@@ -63,8 +62,6 @@ public class Player extends Item{
      */
     @Override
     public void render(Graphics g) {
-       // g.setColor(Color.red);
-        //g.fillRect(getX(), getY(), getWidth(), getHeight());
-        g.drawImage(animationball.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(animationPlayer.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
     }
 }

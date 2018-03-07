@@ -16,6 +16,8 @@ public class Bullet extends Item{
 
     private Game game;  // Reference to the game
     private boolean falling;  // The direction of the bullet
+    private Animation animationball;
+
     
     /**
      * Constructor of the bar
@@ -30,6 +32,8 @@ public class Bullet extends Item{
         super(x, y, width, height);
         this.game = game;
         this.falling = falling;
+        this.animationball = new Animation(Assets.moveBall, 100);
+
     }
 
     /**
@@ -53,6 +57,8 @@ public class Bullet extends Item{
      */
     @Override
     public void tick() {
+        this.animationball.tick();
+
         if(isFalling()){
             setY(getY() + 6);
         }
@@ -67,8 +73,9 @@ public class Bullet extends Item{
      */
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect(getX(), getY(), getWidth(), getHeight());
+        g.drawImage(animationball.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        //g.setColor(Color.blue);
+        //g.fillRect(getX(), getY(), getWidth(), getHeight());
         // render shifting between two costumes/versions
         // g.drawImage(Assets.bullet, getX(), getY(), getWidth(), getHeight(), null);
     }
