@@ -199,9 +199,15 @@ public class Game implements Runnable{
          Assets.init();
          int height_enemy = getHeight() / 3 / 5  - 10;
          int width_enemy = height_enemy + 15;
-         player = new Player(getWidth() / 2 - width_enemy / 2, getHeight() - 75, width_enemy, height_enemy, this);
+         player = new Player(getWidth() / 2 - width_enemy / 2, getHeight() - 50, width_enemy, height_enemy, this);
          Enemy.setDirection(1);
-
+         
+         int separation = getWidth() / 5;
+         for(int i = 1; i <= 4; i++){
+             Barrier barry = new Barrier(separation * i - 50, 500, 100, 125, 8, this);
+             barriers.add(barry);
+         }
+                
          for (int i = 0; i < 10; i++) {
              for (int j = 0; j < 5; j++) {
                  switch (j) {
