@@ -28,6 +28,12 @@ public class Assets {
     public static BufferedImage pause; // to store background image
     public static BufferedImage win; // to store background image
     public static BufferedImage lose; // to store background image
+    
+    public static BufferedImage barrier1; // to store background image
+    public static BufferedImage barrier2; // to store background image
+    public static BufferedImage barrier3; // to store background image
+    public static BufferedImage barrier4; // to store background image
+    
         
     
     /**
@@ -44,6 +50,10 @@ public class Assets {
         pause = ImageLoader.loadImage("/images/pause.png");
         win = ImageLoader.loadImage("/images/win.png");
         lose = ImageLoader.loadImage("/images/lose.png");
+        barrier1 = ImageLoader.loadImage("/images/barrier1.png");
+        barrier2 = ImageLoader.loadImage("/images/barrier2.png");
+        barrier3 = ImageLoader.loadImage("/images/barrier3.png");
+        barrier4 = ImageLoader.loadImage("/images/barrier4.png");
 
         
         
