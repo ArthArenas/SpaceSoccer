@@ -36,6 +36,7 @@ public class Game implements Runnable{
     private ArrayList<Enemy> enemies;   // enemies of the player
     private ArrayList<Barrier> barriers;// protection barriers
     private KeyManager keyManager;      // to manage the keyboard
+    private FileManager fileManager;
     private int lives;                  // amount of lives left
     private int score;                  // score of the player
     private TextLoader textloader;
@@ -361,6 +362,10 @@ public class Game implements Runnable{
                         j = enemies.size();
                     }
                 }
+                // check if the player has won
+                if(enemies.size() == 0){
+                    setRunning(false);
+                }
                 // check collision with the player
                 if(b.intersects(player)){
                     // destroy bullet
@@ -368,6 +373,10 @@ public class Game implements Runnable{
                     i--;
                     // lose a life
                     setLives(getLives() - 1);
+                    // check if the player has lost
+                    if(getLives() == 0){
+                        setRunning(false);
+                    }
                     // set death to true
                     setDeath(true);
                 }
@@ -429,7 +438,7 @@ public class Game implements Runnable{
                     g.drawImage(Assets.win, 0, 0, width, height, null);
                 }
                 else{
-                    g.drawImage(Assets.lose, 0, 0, width, height, null);
+                    g.drawImage(Assets.lose, 0, 0, getWidth() + 100, getHeight(), null);
                 }
             }
             bs.show();

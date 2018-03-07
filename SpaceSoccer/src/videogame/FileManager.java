@@ -5,10 +5,61 @@
  */
 package videogame;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  *
  * @author arena
  */
 public class FileManager {
+    private static String fileName;
+
+    public static void setFileName(String fileName) {
+        FileManager.fileName = fileName;
+    }
+
+    public static String getFileName() {
+        return fileName;
+    }
     
+    public static boolean saveFile(){
+        // define objects
+        PrintWriter printWriter;
+        try{
+            // creating a file
+            printWriter = new PrintWriter(new FileWriter(getFileName()));
+            printWriter.println("Writing on a file hehehe xD xD xD");
+            printWriter.close();
+            // saving the data
+        } catch(IOException ioe){
+            System.out.println("Your hard disk is full" + ioe.toString());
+            return false;
+        }
+        return true;
+    }
+    public static boolean loadFile(){
+        String line;
+        try{
+            FileReader fileReader = new FileReader(getFileName());
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while((line = bufferedReader.readLine()) != null){
+                System.out.println(line);
+            }
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex){
+            System.out.println("The loading file has not been found");
+            return false;
+        }
+        catch(IOException ioe){
+            System.out.println("Error reading loading file");
+            return false;
+        }
+        return true;
+    }
 }
