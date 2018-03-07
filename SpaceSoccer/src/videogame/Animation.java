@@ -8,8 +8,8 @@ package videogame;
 import java.awt.image.BufferedImage;
 
 /**
- *
- * @author Arturo Arenas Esparza | A00820982
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Animation {
     private int speed;              // for the speed of every frame

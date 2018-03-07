@@ -9,20 +9,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
  * @author Arturo Arenas Esparza (A00820982)
  * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Enemy extends Item{
 
-    private Game game;
-    private int score;
-    private static int direction;
+    private Game game; // Reference to the game
+    private int score; // The vallue for winning to this enemy
+    private static int direction; // The direction to move
     private boolean front; // Determines if the enemy can shoot
     private int type; // Represents the shape of the enemy
-    private Animation animationEnemy;
-    private Animation animationEnemy2;
-    private Animation animationEnemy3;
+    private Animation animationEnemy; // Adding animation to the object
+    private Animation animationEnemy2; // Adding animation to the object
+    private Animation animationEnemy3; // Adding animation to the object
     
     /**
      * Constructor of the enemy
@@ -31,6 +30,8 @@ public class Enemy extends Item{
      * @param width the width of the object
      * @param height the height of the object
      * @param score the amount of times it has to be hit to be destroyed
+     * @param type the type of character to display
+     * @param front determinate the if the enemy can shoot
      * @param game the reference to the game
      */
     public Enemy(int x, int y, int width, int height, int score, int type, boolean front, Game game) {
@@ -61,20 +62,34 @@ public class Enemy extends Item{
         return front;
     }
     
-    
+    /**
+     * Getter of the type
+     * @return the type of the object
+     */    
     public int getType() {
         return type;
     }
 
+    /**
+     * Setter for the type
+     * @param type the typ of the enemy
+     */
     public void setType(int type) {
         this.type = type;
     }
 
-   
+     /**
+     * Getter of the direction
+     * @return the direction of the object
+     */
     public static int getDirection() {
         return direction;
     }
 
+    /**
+     * Setter for the direction
+     * @param direction the sdirection to move
+     */
     public static void setDirection(int direction) {
         Enemy.direction = direction;
     }
@@ -139,19 +154,6 @@ public class Enemy extends Item{
                 break;
             default:
                 break;
-                
-        //g.setColor(Color.blue);
-        //g.fillRect(getX(), getY(), getWidth(), getHeight());
-        /*
-        if(this.getPower()==3){
-        g.drawImage(Assets.brick1, getX(), getY(), getWidth(), getHeight(), null);
-        }else if (this.getPower() == 2){
-        g.drawImage(Assets.brick2, getX(), getY(), getWidth(), getHeight(), null);
-        }else if (this.getPower() == 1){
-        g.drawImage(Assets.brick3, getX(), getY(), getWidth(), getHeight(), null);            
-        }*/
-
-                
         }
     }
 }

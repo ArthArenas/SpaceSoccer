@@ -5,12 +5,12 @@
  */
 package videogame;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
- * @author arena
+/**
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Barrier extends Item{
 
@@ -62,6 +62,8 @@ public class Barrier extends Item{
      */
     @Override
     public void render(Graphics g) {
+        
+        //select the design from the power of the barrier
         switch (this.getPower()) {
             case 8:
             case 7:

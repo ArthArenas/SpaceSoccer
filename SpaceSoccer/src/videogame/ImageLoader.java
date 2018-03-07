@@ -7,13 +7,11 @@ package videogame;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- *
- * @author antoniomejorado
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class ImageLoader {
     

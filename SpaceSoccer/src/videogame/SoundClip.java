@@ -12,9 +12,10 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 import java.io.IOException;
 import java.net.URL;
+
 /**
- *
- * @author antoniomejorado
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class SoundClip {
 

@@ -9,17 +9,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- *
  * @author Arturo Arenas Esparza (A00820982)
- * @author Sergio Sanchez Martinez
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class KeyManager implements KeyListener {
     public boolean left;    // flag to move left the bar
     public boolean right;   // flag to move right the bar
     public boolean space;   // flag to space
-    private boolean pause;
-    private boolean pauseEnabled;
-    private boolean restart;
+    private boolean pause;  // flag to pause the game
+    private boolean pauseEnabled; // flag to know the pause
+    private boolean restart; // flag to restart the game
     private boolean keys[];  // to store all the flags for every key
     
     /**

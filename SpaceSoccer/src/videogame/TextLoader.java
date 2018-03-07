@@ -11,39 +11,26 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- *
- * @author sergiosanchez
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class TextLoader extends JPanel {
     
-    private int score;
-    private int lives;
-    private Game game;
+    private Game game; // Reference to the game
     
-    public TextLoader(int score, int lives, Game game){
+    
+    /**
+     * Constructor of the enemy
+     * @param game the reference to the game
+     */
+    public TextLoader(Game game){
         this.game = game;
-        this.score = score;
-        this.lives = lives;
     }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getLives() {
-        return lives;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
-    
-    
-  
+        
+    /**
+     * Paints the score and lives
+     * @param g the grphics to paint the player
+     */
     @Override
     public void paintComponent(Graphics g) {
       super.paintComponent(g);    
@@ -56,6 +43,10 @@ public class TextLoader extends JPanel {
       
     }
   
+    /**
+     * Paints the text loader
+     * @param g the grphics to paint the player
+     */
     public void render(Graphics g){
         paintComponent(g);
     }

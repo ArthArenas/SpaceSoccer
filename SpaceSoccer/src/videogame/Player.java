@@ -5,22 +5,20 @@
  */
 package videogame;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
  * @author Arturo Arenas Esparza (A00820982)
- * @author Sergio Sanchez Martinez
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Player extends Item{
 
-    private Game game;  // Reference to the game
-    private Animation animationPlayer;
+    private final Game game;  // Reference to the game
+    private final Animation animationPlayer;  // Adding animation to the object
 
     
     /**
-     * Constructor of the bar
+     * Constructor of the player
      * @param x the <b>x</b> position of the player
      * @param y the <b>y</b> position of the player
      * @param width the width of the player
@@ -35,12 +33,12 @@ public class Player extends Item{
     }
 
     /**
-     * Update the sttributes of the bar
+     * Update the sttributes of the player
      */
     @Override
     public void tick() {  
         this.animationPlayer.tick();
-        // moving bar depending on keys <-  ->
+        // moving player depending on keys <-  ->
         if (game.getKeyManager().left) {
            setX(getX() - 6);
         }
@@ -57,8 +55,8 @@ public class Player extends Item{
     }
 
     /**
-     * Paints the bar
-     * @param g the grphics to paint the bar
+     * Paints the player
+     * @param g the grphics to paint the player
      */
     @Override
     public void render(Graphics g) {

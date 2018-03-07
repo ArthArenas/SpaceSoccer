@@ -6,8 +6,8 @@
 package videogame;
 
 /**
- *
- * @author antoniomejorado
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class VideoGame {
 

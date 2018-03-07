@@ -10,8 +10,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
- *
- * @author antoniomejorado
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public abstract class Item {
     protected int x;        // to store x position

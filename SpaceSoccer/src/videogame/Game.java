@@ -5,20 +5,13 @@
  */
 package videogame;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import javafx.util.Pair;
-import javax.swing.JLabel;
 
 /**
- *
  * @author Arturo Arenas Esparza (A00820982)
- * @author Sergio Sanchez Martinez
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Game implements Runnable{
     private BufferStrategy bs;          // to have several buffers when displaying
@@ -36,13 +29,11 @@ public class Game implements Runnable{
     private ArrayList<Enemy> enemies;   // enemies of the player
     private ArrayList<Barrier> barriers;// protection barriers
     private KeyManager keyManager;      // to manage the keyboard
-    private FileManager fileManager;
+    private FileManager fileManager;    // to load the file manager
     private int lives;                  // amount of lives left
     private int score;                  // score of the player
-    private TextLoader textloader;
+    private TextLoader textloader;      // to print text
     final private int LIVES;            // initial amount of lives
-    // store pairs of IDs and times of activeness to represent active perks
-    private ArrayList<Pair<Integer, Integer>> activePerks;
     
     /**
      * to create title, width and height and set the game is still not running
@@ -64,7 +55,7 @@ public class Game implements Runnable{
         running = false;
         death = false;
         keyManager = new KeyManager();
-        textloader = new TextLoader(0,0,this);
+        textloader = new TextLoader(this);
     }
     
     /**
@@ -102,7 +93,12 @@ public class Game implements Runnable{
     public boolean isDeath() {
         return death;
     }
-
+    
+    
+    /**
+     * Getter for the status of the bullet
+     * @return the status of the bullet
+     */
     public boolean isBulletInTheAir() {
         for(int i = 0; i < bullets.size(); i++){
             if(!bullets.get(i).isFalling()){
@@ -258,6 +254,10 @@ public class Game implements Runnable{
         return keyManager;
     }
     
+     /**
+     * Getter for the text loader
+     * @return the text loader of the game
+     */    
     public TextLoader getTextLoader(){
         return textloader;
     }
@@ -283,6 +283,15 @@ public class Game implements Runnable{
                 }
                 if(enemies.get(i).getX() > right){
                     right = enemies.get(i).getX();
+                }
+                if(enemies.get(i).getY()+50 == getHeight() + 50){
+                    setLives(getLives() - 1);
+                    // check if the player has lost
+                    if(getLives() == 0){
+                        setRunning(false);
+                    }
+                    // set death to true
+                    setDeath(true);
                 }
             }
             if((right + 70 >= getWidth() || left - 10 <= 0) && Enemy.getDirection() != 0){
@@ -383,7 +392,7 @@ public class Game implements Runnable{
             }
         }
     }
-        /**
+     /**
      * Paints the elements of the game
      */
     private void render() {
@@ -408,7 +417,10 @@ public class Game implements Runnable{
                 if(paused){
                      g.drawImage(Assets.pause, 0, 0, width, height, null);
                 }
-                else{
+                else if(this.isDeath()){
+                    g.drawImage(Assets.restart, 0, 0, width, height, null);
+                    
+                }else{
                     g.drawImage(Assets.background, 0, 0, width, height, null);
                     // render the player
                     //player.render(g);

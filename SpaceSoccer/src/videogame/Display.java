@@ -10,8 +10,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
- *
- * @author antoniomejorado
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Display {
     private JFrame jframe;  // this is the app class

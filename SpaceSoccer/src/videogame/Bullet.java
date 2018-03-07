@@ -5,22 +5,21 @@
  */
 package videogame;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
- * @author arena
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Bullet extends Item{
 
     private Game game;  // Reference to the game
     private boolean falling;  // The direction of the bullet
-    private Animation animationball;
+    private Animation animationball; // Adding animation to the object
 
     
     /**
-     * Constructor of the bar
+     * Constructor of the bullet
      * @param x the <b>x</b> position of the bullet
      * @param y the <b>y</b> position of the bullet
      * @param width the width of the bullet
@@ -57,8 +56,11 @@ public class Bullet extends Item{
      */
     @Override
     public void tick() {
+        
+        //updates the animation of the bullet
         this.animationball.tick();
 
+        //set the direction of the bullet
         if(isFalling()){
             setY(getY() + 6);
         }
@@ -74,9 +76,5 @@ public class Bullet extends Item{
     @Override
     public void render(Graphics g) {
         g.drawImage(animationball.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        //g.setColor(Color.blue);
-        //g.fillRect(getX(), getY(), getWidth(), getHeight());
-        // render shifting between two costumes/versions
-        // g.drawImage(Assets.bullet, getX(), getY(), getWidth(), getHeight(), null);
     }
 }
