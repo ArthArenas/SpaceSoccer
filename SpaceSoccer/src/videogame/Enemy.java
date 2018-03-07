@@ -30,17 +30,10 @@ public class Enemy extends Item{
      * @param score the amount of times it has to be hit to be destroyed
      * @param game the reference to the game
      */
-<<<<<<< HEAD
-    public Enemy(int x, int y, int width, int height, int type , Game game) {
-        super(x, y, width, height);
-        this.game = game;
-        this.type = type;
-=======
     public Enemy(int x, int y, int width, int height, int score, Game game) {
         super(x, y, width, height);
         game = game;
         score = score;
->>>>>>> 1728f3688dd6b82c3bf4d4ad2a091103ebc25276
         front = false;
     }
 
@@ -84,11 +77,6 @@ public class Enemy extends Item{
         this.score = score;
     }
     
-    public int getScore()
-    {
-        return type*15;
-    }
-    
     /**
      * Updates the attributes of the enemy
      */
@@ -108,9 +96,6 @@ public class Enemy extends Item{
      */
     @Override
     public void render(Graphics g) {
-<<<<<<< HEAD
-        g.drawImage(Assets.enemy, getX(), getY(), getWidth(), getHeight(), null);
-=======
         g.setColor(Color.blue);
         g.fillRect(getX(), getY(), getWidth(), getHeight());
         /*
@@ -121,6 +106,5 @@ public class Enemy extends Item{
         }else if (this.getPower() == 1){
             g.drawImage(Assets.brick3, getX(), getY(), getWidth(), getHeight(), null);            
         }*/
->>>>>>> 1728f3688dd6b82c3bf4d4ad2a091103ebc25276
     }
 }

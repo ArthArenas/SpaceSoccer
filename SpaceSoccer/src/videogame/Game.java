@@ -9,11 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.HashSet; 
-=======
 import java.util.HashSet;
->>>>>>> 1728f3688dd6b82c3bf4d4ad2a091103ebc25276
 import java.util.Set;
 import javafx.util.Pair;
 
@@ -142,15 +138,6 @@ public class Game implements Runnable {
      */
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
-<<<<<<< HEAD
-          Assets.init();
-         int width_enemy = getWidth() / 10 - 6;
-         int height_enemy = getHeight() / 3 / 5  - 10;
-         for (int i = 0; i < 10; i++) {
-             for (int j = 0; j < 5; j++) {
-                 Enemy enemy = new Enemy(i * (width_enemy + 3) + 15 , 
-                         j * (height_enemy + 5) + 15 , width_enemy, height_enemy, 100, this);
-=======
          Assets.init();
          int height_enemy = getHeight() / 3 / 5  - 10;
          int width_enemy = height_enemy + 15;
@@ -160,7 +147,6 @@ public class Game implements Runnable {
              for (int j = 0; j < 5; j++) {
                  Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 , 
                          j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, this);
->>>>>>> 1728f3688dd6b82c3bf4d4ad2a091103ebc25276
                  enemies.add(enemy);
              }
          }
@@ -231,10 +217,8 @@ public class Game implements Runnable {
         }
         if(!paused){
             // ticking the player
-<<<<<<< HEAD
             //player.tick();
             // ticking the enemies
-=======
             player.tick();
             // get the left-most and right-most positions of the enemies
             int left = getWidth();
@@ -261,7 +245,6 @@ public class Game implements Runnable {
                 }
             }
             // tick the enemies
->>>>>>> 1728f3688dd6b82c3bf4d4ad2a091103ebc25276
             for(int i = 0; i < enemies.size(); i++){
                 enemies.get(i).tick();
             }
@@ -344,11 +327,8 @@ public class Game implements Runnable {
                 else{
                     g.drawImage(Assets.background, 0, 0, width, height, null);
                     // render the player
-<<<<<<< HEAD
                     //player.render(g);
-=======
                     player.render(g);
->>>>>>> 1728f3688dd6b82c3bf4d4ad2a091103ebc25276
                     // render all the enemies
                     for(int i = 0; i < enemies.size(); i++){
                         enemies.get(i).render(g);
