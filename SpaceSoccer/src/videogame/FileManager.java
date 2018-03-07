@@ -18,10 +18,6 @@ import java.io.PrintWriter;
  */
 public class FileManager {
     private static String fileName;
-    
-    public FileManager(String fileName) {
-        this.fileName = fileName;
-    }
 
     public static void setFileName(String fileName) {
         FileManager.fileName = fileName;
@@ -31,13 +27,14 @@ public class FileManager {
         return fileName;
     }
     
-    public static boolean saveFile(Game game){
+    public static boolean saveFile(){
         // define objects
         PrintWriter printWriter;
         try{
             // creating a file
             printWriter = new PrintWriter(new FileWriter(getFileName()));
             printWriter.println("Writing on a file hehehe xD xD xD");
+            printWriter.close();
             // saving the data
         } catch(IOException ioe){
             System.out.println("Your hard disk is full" + ioe.toString());

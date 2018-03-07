@@ -65,7 +65,6 @@ public class Game implements Runnable{
         death = false;
         keyManager = new KeyManager();
         textloader = new TextLoader(0,0,this);
-        fileManager = new FileManager();
     }
     
     /**
@@ -357,6 +356,10 @@ public class Game implements Runnable{
                         j = enemies.size();
                     }
                 }
+                // check if the player has won
+                if(enemies.size() == 0){
+                    setRunning(false);
+                }
                 // check collision with the player
                 if(b.intersects(player)){
                     // destroy bullet
@@ -364,6 +367,10 @@ public class Game implements Runnable{
                     i--;
                     // lose a life
                     setLives(getLives() - 1);
+                    // check if the player has lost
+                    if(getLives() == 0){
+                        setRunning(false);
+                    }
                     // set death to true
                     setDeath(true);
                 }
@@ -425,7 +432,7 @@ public class Game implements Runnable{
                     g.drawImage(Assets.win, 0, 0, width, height, null);
                 }
                 else{
-                    g.drawImage(Assets.lose, 0, 0, width, height, null);
+                    g.drawImage(Assets.lose, 0, 0, getWidth() + 100, getHeight(), null);
                 }
             }
             bs.show();

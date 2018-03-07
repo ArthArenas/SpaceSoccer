@@ -15,6 +15,9 @@ public class VideoGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        FileManager.setFileName("data.txt");
+        FileManager.saveFile();
+        FileManager.loadFile();
         // TODO code application logic here
         Game g = new Game("Juego", 1080, 800);
         g.start();
