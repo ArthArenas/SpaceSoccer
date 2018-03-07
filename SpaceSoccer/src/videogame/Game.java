@@ -36,6 +36,7 @@ public class Game implements Runnable{
     private ArrayList<Enemy> enemies;   // enemies of the player
     private ArrayList<Barrier> barriers;// protection barriers
     private KeyManager keyManager;      // to manage the keyboard
+    private FileManager fileManager;
     private int lives;                  // amount of lives left
     private int score;                  // score of the player
     private TextLoader textloader;
@@ -64,6 +65,7 @@ public class Game implements Runnable{
         death = false;
         keyManager = new KeyManager();
         textloader = new TextLoader(0,0,this);
+        fileManager = new FileManager();
     }
     
     /**
