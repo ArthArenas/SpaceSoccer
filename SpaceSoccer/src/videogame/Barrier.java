@@ -62,18 +62,20 @@ public class Barrier extends Item{
      */
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.pink);
-        g.fillRect(getX(), getY(), getWidth(), getHeight());
         switch (this.getPower()) {
-            case 4:
+            case 8:
+            case 7:
                 g.drawImage(Assets.barrier1, getX(), getY(), getWidth(), getHeight(), null);
                 break;
-            case 3:
+            case 6:
+            case 5:                
                 g.drawImage(Assets.barrier2, getX(), getY(), getWidth(), getHeight(), null);
                 break;
-            case 2:
+            case 4:
+            case 3:
                 g.drawImage(Assets.barrier3, getX(), getY(), getWidth(), getHeight(), null);
                 break;
+            case 2:
             case 1:
                 g.drawImage(Assets.barrier4, getX(), getY(), getWidth(), getHeight(), null);
                 break;
