@@ -33,9 +33,9 @@ public class Enemy extends Item{
      * @param score the amount of times it has to be hit to be destroyed
      * @param game the reference to the game
      */
-    public Enemy(int x, int y, int width, int height, int score, int type,  Game game) {
+    public Enemy(int x, int y, int width, int height, int score, int type, boolean front, Game game) {
         super(x, y, width, height);
-        front = false;
+        this.front = front;
         this.game = game;
         this.score = score;
         this.type = type;
@@ -103,6 +103,14 @@ public class Enemy extends Item{
         this.animationEnemy.tick();
         this.animationEnemy2.tick();
         this.animationEnemy3.tick();
+        
+        if(isFront()){
+            int shootingCoeff = (int)(Math.random() * 400.0);
+            if(shootingCoeff == 0){
+                // fires a ball
+                game.addBullet(getX(), getY() + getHeight() + 3, 20, 20, true);
+            }
+        }
 
         if(getDirection() == 0){
             setY(getY() + 10);

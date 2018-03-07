@@ -36,7 +36,6 @@ public class Game implements Runnable {
     private KeyManager keyManager;      // to manage the keyboard
     private int lives;                  // amount of lives left
     private int score;                  // score of the player
-    private boolean bulletInTheAir;
     final private int LIVES;            // initial amount of lives
     // store pairs of IDs and times of activeness to represent active perks
     private ArrayList<Pair<Integer, Integer>> activePerks;
@@ -100,11 +99,12 @@ public class Game implements Runnable {
     }
 
     public boolean isBulletInTheAir() {
-        return bulletInTheAir;
-    }
-
-    public void setBulletInTheAir(boolean bulletInTheAir) {
-        this.bulletInTheAir = bulletInTheAir;
+        for(int i = 0; i < bullets.size(); i++){
+            if(!bullets.get(i).isFalling()){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -142,12 +142,16 @@ public class Game implements Runnable {
          //
     }
     
+    public void addBullet(int x, int y, int width, int height, boolean falling){
+        Bullet newBullet = new Bullet(x, y, width, height, falling, this);
+        bullets.add(newBullet);
+    }
+    
     /**
      * initializing the display window of the game
      */
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
-         bulletInTheAir = false;
          Assets.init();
          int height_enemy = getHeight() / 3 / 5  - 10;
          int width_enemy = height_enemy + 15;
@@ -159,7 +163,7 @@ public class Game implements Runnable {
                      case 0:
                          {
                              Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 ,
-                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 3, this);
+                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 3, false, this);
                              enemies.add(enemy);
                              break;
                          }
@@ -167,15 +171,16 @@ public class Game implements Runnable {
                      case 2:                         
                          {
                              Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 ,
-                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 2, this);
+                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 2, false, this);
                              enemies.add(enemy);
                              break;
                          }
                      case 3:
                      case 4:
                          {
+                             boolean frontFlag = (j == 4);
                              Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 ,
-                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 1, this);
+                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 1, frontFlag, this);
                              enemies.add(enemy);
                              break;
                          }
@@ -284,11 +289,18 @@ public class Game implements Runnable {
             if (this.getKeyManager().space && !isBulletInTheAir()) {
                 bullets.add(new Bullet(this.player.getX() + this.player.getWidth() / 2 - 10,
                     this.player.getY()-200, 20, 20, false, this));
-                setBulletInTheAir(true);
             }
             // ticking the bullets
             for(int i = 0; i < bullets.size(); i++){
                 bullets.get(i).tick();
+                if(bullets.get(i).getY() + 20 <= 0){
+                    bullets.remove(i);
+                    i--;
+                }
+                else if(bullets.get(i).getY() >= getHeight()){
+                    bullets.remove(i);
+                    i--;
+                }
             }
             // ticking the barriers
             for(int i = 0; i < barriers.size(); i++){
@@ -301,10 +313,6 @@ public class Game implements Runnable {
                 for(int j = 0; j < barriers.size(); j++){
                     Barrier barrier = barriers.get(j);
                     if(b.intersects(barrier)){
-                        // update bullet in the air flag
-                        if(!b.isFalling()){
-                            setBulletInTheAir(false);
-                        }
                         // destroy bullet and lower the power of the barrier
                         bullets.remove(i);
                         i--;
@@ -312,8 +320,8 @@ public class Game implements Runnable {
                         // destroy the barrier if necessary
                         if(barrier.getPower() == 0){
                             barriers.remove(j);
-                            j--;
                         }
+                        j = barriers.size();
                     }
                 }
                 // check collision with enemies
@@ -322,7 +330,12 @@ public class Game implements Runnable {
                     if(b.intersects(enemy)){
                         // update bullet in the air flag
                         if(!b.isFalling()){
-                            setBulletInTheAir(false);
+                        }
+                        // change front if neccessary
+                        if(enemy.isFront()){
+                            if(j - 1 >= 0 && enemies.get(j - 1).getY() < enemy.getY() && Math.abs(enemies.get(j - 1).getX() - enemy.getX()) < 20){
+                                enemies.get(j - 1).setFront(true);
+                            }
                         }
                         // add score
                         setScore(getScore() + enemy.getScore());
@@ -330,7 +343,7 @@ public class Game implements Runnable {
                         bullets.remove(i);
                         i--;
                         enemies.remove(j);
-                        j--;
+                        j = enemies.size();
                     }
                 }
                 // check collision with the player
