@@ -36,6 +36,7 @@ public class Game implements Runnable {
     private KeyManager keyManager;      // to manage the keyboard
     private int lives;                  // amount of lives left
     private int score;                  // score of the player
+    private boolean bulletInTheAir;
     final private int LIVES;            // initial amount of lives
     // store pairs of IDs and times of activeness to represent active perks
     private ArrayList<Pair<Integer, Integer>> activePerks;
@@ -98,6 +99,14 @@ public class Game implements Runnable {
         return death;
     }
 
+    public boolean isBulletInTheAir() {
+        return bulletInTheAir;
+    }
+
+    public void setBulletInTheAir(boolean bulletInTheAir) {
+        this.bulletInTheAir = bulletInTheAir;
+    }
+
     /**
      * Sets the amount of lives left 
      * @param lives the amount of lives left
@@ -138,6 +147,7 @@ public class Game implements Runnable {
      */
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
+         bulletInTheAir = false;
          Assets.init();
          int height_enemy = getHeight() / 3 / 5  - 10;
          int width_enemy = height_enemy + 15;
@@ -246,9 +256,10 @@ public class Game implements Runnable {
             for(int i = 0; i < enemies.size(); i++){
                 enemies.get(i).tick();
             }
-            if (this.getKeyManager().space) {
+            if (this.getKeyManager().space && !isBulletInTheAir()) {
                 bullets.add(new Bullet(this.player.getX() + this.player.getWidth() / 2 - 10,
                     this.player.getY()-200, 20, 20, false, this));
+                setBulletInTheAir(true);
             }
             // ticking the bullets
             for(int i = 0; i < bullets.size(); i++){
@@ -265,6 +276,10 @@ public class Game implements Runnable {
                 for(int j = 0; j < barriers.size(); j++){
                     Barrier barrier = barriers.get(j);
                     if(b.intersects(barrier)){
+                        // update bullet in the air flag
+                        if(!b.isFalling()){
+                            setBulletInTheAir(false);
+                        }
                         // destroy bullet and lower the power of the barrier
                         bullets.remove(i);
                         i--;
@@ -280,6 +295,10 @@ public class Game implements Runnable {
                 for(int j = 0; j < enemies.size(); j++){
                     Enemy enemy = enemies.get(j);
                     if(b.intersects(enemy)){
+                        // update bullet in the air flag
+                        if(!b.isFalling()){
+                            setBulletInTheAir(false);
+                        }
                         // add score
                         setScore(getScore() + enemy.getScore());
                         // destroy enemy and bullet
