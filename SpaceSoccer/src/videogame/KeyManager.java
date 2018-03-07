@@ -19,6 +19,14 @@ public class KeyManager implements KeyListener {
     private boolean pause;  // flag to pause the game
     private boolean pauseEnabled; // flag to know the pause
     private boolean restart; // flag to restart the game
+=======
+    private boolean pause;
+    private boolean pauseEnabled;
+    private boolean saveEnabled;
+    private boolean restart;
+    private boolean save;
+    private boolean load;
+>>>>>>> 216f9efd986807353e287bde4bb31e8be9215456
     private boolean keys[];  // to store all the flags for every key
     
     /**

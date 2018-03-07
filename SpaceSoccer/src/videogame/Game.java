@@ -86,6 +86,22 @@ public class Game implements Runnable{
         return score;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public ArrayList<Barrier> getBarriers() {
+        return barriers;
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
     /**
      * Getter for the death status of the game
      * @return the death status of the game
@@ -146,6 +162,29 @@ public class Game implements Runnable{
     public void addBullet(int x, int y, int width, int height, boolean falling){
         Bullet newBullet = new Bullet(x, y, width, height, falling, this);
         bullets.add(newBullet);
+    }
+    
+    public void loadingGame(int lives, int score, int playerPosX, int playerPosY, int bulletsSize, int[] BulletsPosX, int[] BulletsPosY, boolean[] BulletsFalling,
+                     int barriersSize, int[] BarriersPosX, int[] BarriersPosY, int[] BarriersPower, int enemiesSize, int[] EnemiesPosX, int[] EnemiesPosY, int[] EnemiesType, boolean[] EnemiesFront){
+        setLives(lives);
+        setScore(score);
+        getPlayer().setX(playerPosX);
+        getPlayer().setY(playerPosY);
+        bullets.clear();
+        for(int i = 0; i < bulletsSize; i++){
+            Bullet b = new Bullet(BulletsPosX[i], BulletsPosY[i], 20, 20, BulletsFalling[i], this);
+            bullets.add(b);
+        }
+        barriers.clear();
+        for(int i = 0; i < barriersSize; i++){
+            Barrier b = new Barrier(BarriersPosX[i], BarriersPosY[i], 100, 125, BarriersPower[i], this);
+            barriers.add(b);
+        }
+        enemies.clear();
+        for(int i = 0; i < enemiesSize; i++){
+            Enemy e = new Enemy(EnemiesPosX[i], EnemiesPosY[i], getHeight() / 3 / 5  + 5, getHeight() / 3 / 5  - 10, 100, EnemiesType[i], EnemiesFront[i], this);
+            enemies.add(e);
+        }
     }
     
     /**
@@ -272,6 +311,9 @@ public class Game implements Runnable{
             paused = !paused;
         }
         if(!paused){
+            if(getKeyManager().isLoad()){
+                FileManager.loadFile(this);
+            }
             // ticking the enemies
             player.tick();
             // get the left-most and right-most positions of the enemies
@@ -389,6 +431,14 @@ public class Game implements Runnable{
                     // set death to true
                     setDeath(true);
                 }
+            }
+        }
+        else{
+            // we can save from here
+            if(getKeyManager().isSave()){
+                getKeyManager().setSave(false);
+                FileManager.saveFile(this);
+                FileManager.loadFile(this);
             }
         }
     }

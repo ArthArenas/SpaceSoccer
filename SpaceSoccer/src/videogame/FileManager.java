@@ -27,13 +27,11 @@ public class FileManager {
         return fileName;
     }
     
-    public static boolean saveFile(){
         // define objects
         PrintWriter printWriter;
         try{
             // creating a file
             printWriter = new PrintWriter(new FileWriter(getFileName()));
-            printWriter.println("Writing on a file hehehe xD xD xD");
             printWriter.close();
             // saving the data
         } catch(IOException ioe){
@@ -42,13 +40,10 @@ public class FileManager {
         }
         return true;
     }
-    public static boolean loadFile(){
         String line;
         try{
             FileReader fileReader = new FileReader(getFileName());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while((line = bufferedReader.readLine()) != null){
-                System.out.println(line);
             }
             bufferedReader.close();
         }
