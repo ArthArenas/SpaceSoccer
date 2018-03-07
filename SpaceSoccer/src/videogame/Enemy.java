@@ -27,9 +27,10 @@ public class Enemy extends Item{
      * @param height the height of the player
      * @param game the copy of the game
      */
-    public Enemy(int x, int y, int width, int height, Game game) {
+    public Enemy(int x, int y, int width, int height, int type , Game game) {
         super(x, y, width, height);
         this.game = game;
+        this.type = type;
         front = false;
     }
 
@@ -50,6 +51,11 @@ public class Enemy extends Item{
         this.front = front;
     }
     
+    public int getScore()
+    {
+        return type*15;
+    }
+    
     /**
      * Update the sttributes of the bar
      */
@@ -63,6 +69,6 @@ public class Enemy extends Item{
      */
     @Override
     public void render(Graphics g) {
-        // g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(Assets.enemy, getX(), getY(), getWidth(), getHeight(), null);
     }
 }
