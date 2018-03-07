@@ -62,8 +62,6 @@ public class Barrier extends Item{
      */
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.pink);
-        g.fillRect(getX(), getY(), getWidth(), getHeight());
         switch (this.getPower()) {
             case 4:
                 g.drawImage(Assets.barrier1, getX(), getY(), getWidth(), getHeight(), null);

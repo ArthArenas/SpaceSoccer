@@ -19,7 +19,10 @@ public class KeyManager implements KeyListener {
     public boolean space;   // flag to space
     private boolean pause;
     private boolean pauseEnabled;
+    private boolean saveEnabled;
     private boolean restart;
+    private boolean save;
+    private boolean load;
     private boolean keys[];  // to store all the flags for every key
     
     /**
@@ -28,6 +31,7 @@ public class KeyManager implements KeyListener {
     public KeyManager() {
         keys = new boolean[256];
         pauseEnabled = true;
+        saveEnabled = true;
     }
 
     /**
@@ -36,6 +40,30 @@ public class KeyManager implements KeyListener {
      */
     public void setPause(boolean pause) {
         keys[KeyEvent.VK_P] = pause;
+    }
+
+    public boolean isSave() {
+        return save;
+    }
+
+    public boolean isLoad() {
+        return load;
+    }
+
+    public void setSave(boolean save) {
+        keys[KeyEvent.VK_S] = save;
+    }
+
+    public void setLoad(boolean load) {
+        this.load = load;
+    }
+
+    public void setSaveEnabled(boolean saveEnabled) {
+        this.saveEnabled = saveEnabled;
+    }
+
+    public boolean isSaveEnabled() {
+        return saveEnabled;
     }
 
     /**
@@ -74,6 +102,12 @@ public class KeyManager implements KeyListener {
                 pauseEnabled = false;
             }
         }
+        else if(e.getKeyCode() == KeyEvent.VK_S){
+            if(saveEnabled){
+                keys[KeyEvent.VK_S] = true;
+                saveEnabled = false;
+            }
+        }
         else{
             // set true to every key pressed
             keys[e.getKeyCode()] = true;
@@ -91,7 +125,10 @@ public class KeyManager implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_P){
             pauseEnabled = true;
         }
-            keys[e.getKeyCode()] = false;
+        else if(e.getKeyCode() == KeyEvent.VK_S){
+            saveEnabled = true;
+        }
+        keys[e.getKeyCode()] = false;
     }
     
     /**
@@ -102,6 +139,8 @@ public class KeyManager implements KeyListener {
         right = keys[KeyEvent.VK_RIGHT];
         space = keys[KeyEvent.VK_SPACE];
         pause = keys[KeyEvent.VK_P];
+        save = keys[KeyEvent.VK_S];
+        load = keys[KeyEvent.VK_L];
         restart = keys[KeyEvent.VK_R];
     }
 }
