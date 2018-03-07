@@ -86,6 +86,10 @@ public class Game implements Runnable {
         return lives;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     /**
      * Getter for the death status of the game
      * @return the death status of the game
@@ -116,6 +120,10 @@ public class Game implements Runnable {
      */
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
     
     /**
@@ -208,7 +216,32 @@ public class Game implements Runnable {
         if(!paused){
             // ticking the player
             player.tick();
-            // ticking the enemies
+            // get the left-most and right-most positions of the enemies
+            int left = getWidth();
+            int right = 0;
+            for(int i = 0; i < enemies.size(); i++){
+                if(enemies.get(i).getX() < left){
+                    left = enemies.get(i).getX();
+                }
+                if(enemies.get(i).getX() > right){
+                    right = enemies.get(i).getX();
+                }
+            }
+            /*
+            if(right + 10 >= getWidth() || left - 10 <= 0 && Enemy.getDirection() != 0){
+                // go down
+                Enemy.setDirection(0);
+            }
+            if(Enemy.getDirection() == 0){
+                // we've gone down, now let's continue in our proper direction
+                if(right + 10 >= getWidth()){
+                    //Enemy.setDirection(-1);
+                }
+                else if(left - 10 <= 0){
+                    //Enemy.setDirection(1);
+                }
+            }*/
+            // tick the enemies
             for(int i = 0; i < enemies.size(); i++){
                 enemies.get(i).tick();
             }
@@ -228,27 +261,38 @@ public class Game implements Runnable {
                     Barrier barrier = barriers.get(j);
                     if(b.intersects(barrier)){
                         // destroy bullet and lower the power of the barrier
-                        
+                        bullets.remove(i);
+                        i--;
+                        barrier.setPower(barrier.getPower() - 1);
                         // destroy the barrier if necessary
+                        if(barrier.getPower() == 0){
+                            barriers.remove(j);
+                            j--;
+                        }
                     }
                 }
                 // check collision with enemies
                 for(int j = 0; j < enemies.size(); j++){
                     Enemy enemy = enemies.get(j);
                     if(b.intersects(enemy)){
-                        // destroy enemy and bullet
-                        
                         // add score
+                        setScore(getScore() + enemy.getScore());
+                        // destroy enemy and bullet
+                        bullets.remove(i);
+                        i--;
+                        enemies.remove(j);
+                        j--;
                     }
                 }
                 // check collision with the player
                 if(b.intersects(player)){
                     // destroy bullet
-                    
+                    bullets.remove(i);
+                    i--;
                     // lose a life
-                    
+                    setLives(getLives() - 1);
                     // set death to true
-                    
+                    setDeath(true);
                 }
             }
         }

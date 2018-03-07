@@ -5,16 +5,20 @@
  */
 package videogame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
  *
- * @author arena
+ * @author Arturo Arenas Esparza (A00820982)
+ * @author Sergio Sanchez Martinez (A00809693)
  */
 public class Enemy extends Item{
 
     private Game game;
     private int score;
+    private boolean front; // Determines if the enemy can shoot
+    private int type; // Represents the shape of the enemy
     
     /**
      * Constructor of the enemy
@@ -27,8 +31,9 @@ public class Enemy extends Item{
      */
     public Enemy(int x, int y, int width, int height, int score, Game game) {
         super(x, y, width, height);
-        this.game = game;
-        this.score = score;
+        game = game;
+        score = score;
+        front = false;
     }
 
     /**
@@ -37,6 +42,22 @@ public class Enemy extends Item{
      */
     public int getScore() {
         return score;
+    }
+    
+     /**
+     * Getter for the front
+     * @return the status of an enemy to
+     */    
+    public boolean isFront() {
+        return front;
+    }
+    
+    /**
+     * Setter for the front
+     * @param front the status of the enemy to shot
+     */
+    public void setFront(boolean front) {
+        this.front = front;
     }
 
     /**
