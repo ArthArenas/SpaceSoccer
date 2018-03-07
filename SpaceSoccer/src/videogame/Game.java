@@ -138,13 +138,15 @@ public class Game implements Runnable {
      */
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
-         // Assets.init();
-         int width_enemy = getWidth() / 10 - 6;
+         Assets.init();
          int height_enemy = getHeight() / 3 / 5  - 10;
+         int width_enemy = height_enemy + 15;
+         player = new Player(getWidth() / 2 - width_enemy / 2, getHeight() - 75, width_enemy, height_enemy, this);
+         Enemy.setDirection(1);
          for (int i = 0; i < 10; i++) {
              for (int j = 0; j < 5; j++) {
-                 Enemy enemy = new Enemy(i * (width_enemy + 3) + 15 , 
-                         j * (height_enemy + 5) + 15 , width_enemy, height_enemy, 100, this);
+                 Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 , 
+                         j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, this);
                  enemies.add(enemy);
              }
          }
@@ -227,20 +229,19 @@ public class Game implements Runnable {
                     right = enemies.get(i).getX();
                 }
             }
-            /*
-            if(right + 10 >= getWidth() || left - 10 <= 0 && Enemy.getDirection() != 0){
+            if((right + 70 >= getWidth() || left - 10 <= 0) && Enemy.getDirection() != 0){
                 // go down
                 Enemy.setDirection(0);
             }
-            if(Enemy.getDirection() == 0){
+            else if(Enemy.getDirection() == 0){
                 // we've gone down, now let's continue in our proper direction
-                if(right + 10 >= getWidth()){
-                    //Enemy.setDirection(-1);
+                if(right + 70 >= getWidth()){
+                    Enemy.setDirection(-1);
                 }
                 else if(left - 10 <= 0){
-                    //Enemy.setDirection(1);
+                    Enemy.setDirection(1);
                 }
-            }*/
+            }
             // tick the enemies
             for(int i = 0; i < enemies.size(); i++){
                 enemies.get(i).tick();
@@ -322,7 +323,7 @@ public class Game implements Runnable {
                     // g.drawImage(Assets.pauseBackground, 0, 0, width, height, null);
                 }
                 else{
-                    // g.drawImage(Assets.background, 0, 0, width, height, null);
+                    g.drawImage(Assets.background, 0, 0, width, height, null);
                     // render the player
                     player.render(g);
                     // render all the enemies

@@ -17,6 +17,7 @@ public class Enemy extends Item{
 
     private Game game;
     private int score;
+    private static int direction;
     private boolean front; // Determines if the enemy can shoot
     private int type; // Represents the shape of the enemy
     
@@ -51,6 +52,14 @@ public class Enemy extends Item{
     public boolean isFront() {
         return front;
     }
+   
+    public static int getDirection() {
+        return direction;
+    }
+
+    public static void setDirection(int direction) {
+        Enemy.direction = direction;
+    }
     
     /**
      * Setter for the front
@@ -69,11 +78,16 @@ public class Enemy extends Item{
     }
     
     /**
-     * Update the sttributes of the enemy
+     * Updates the attributes of the enemy
      */
     @Override
     public void tick() {
-        //
+        if(getDirection() == 0){
+            setY(getY() + 10);
+        }
+        else{
+            setX(getX() + 3 * getDirection());
+        }
     }
 
     /**
@@ -82,6 +96,8 @@ public class Enemy extends Item{
      */
     @Override
     public void render(Graphics g) {
+        g.setColor(Color.blue);
+        g.fillRect(getX(), getY(), getWidth(), getHeight());
         /*
         if(this.getPower()==3){
             g.drawImage(Assets.brick1, getX(), getY(), getWidth(), getHeight(), null);
