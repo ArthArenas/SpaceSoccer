@@ -18,13 +18,23 @@ public class Assets {
     public static BufferedImage enemy;     // to store the ball image
     public static BufferedImage enemy2;     // to store the ball image
     public static BufferedImage enemy3;     // to store the ball image
-    public static BufferedImage pause; // to store background image
     public static BufferedImage spritesBall; // to set the sprite of the ball
     public static BufferedImage moveBall[]; //moving the ball
     public static BufferedImage playerCut[]; //player sheet
     public static BufferedImage enemyCut[]; //player sheet
     public static BufferedImage enemyCut2[]; //player sheet
     public static BufferedImage enemyCut3[]; //player sheet
+
+    public static BufferedImage pause; // to store background image
+    public static BufferedImage win; // to store background image
+    public static BufferedImage lose; // to store background image
+    
+    public static BufferedImage barrier1; // to store background image
+    public static BufferedImage barrier2; // to store background image
+    public static BufferedImage barrier3; // to store background image
+    public static BufferedImage barrier4; // to store background image
+    
+        
     
     /**
      * initializing the images of the game
@@ -37,6 +47,15 @@ public class Assets {
         enemy = ImageLoader.loadImage("/images/enemy.png");
         enemy2 = ImageLoader.loadImage("/images/enemy2.png");
         enemy3 = ImageLoader.loadImage("/images/enemy3.png");
+        pause = ImageLoader.loadImage("/images/pause.png");
+        win = ImageLoader.loadImage("/images/win.png");
+        lose = ImageLoader.loadImage("/images/lose.png");
+        barrier1 = ImageLoader.loadImage("/images/barrier1.png");
+        barrier2 = ImageLoader.loadImage("/images/barrier2.png");
+        barrier3 = ImageLoader.loadImage("/images/barrier3.png");
+        barrier4 = ImageLoader.loadImage("/images/barrier4.png");
+
+        
         
         SpriteSheet spritesheetBall = new SpriteSheet(spritesBall);
         SpriteSheet spritesheetPlayer = new SpriteSheet(player);

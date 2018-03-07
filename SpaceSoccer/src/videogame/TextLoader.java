@@ -24,7 +24,10 @@ public class TextLoader extends JPanel {
         this.game = game;
         this.score = score;
         this.lives = lives;
-        
+        int fontSize = 26;
+//        this.game.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
+//        this.game.setColor(Color.white);
+
     }
 
     public int getScore() {
@@ -47,13 +50,7 @@ public class TextLoader extends JPanel {
   
     @Override
     public void paintComponent(Graphics g) {
-      super.paintComponent(g);
-      
-      int fontSize = 26;
-
-    g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize)); 
-    g.setColor(Color.white);
-      
+      super.paintComponent(g);      
       g.drawString(String.valueOf(game.getScore()), 30 , 30);
       g.drawString(String.valueOf(game.getLives()), game.getWidth()-60, 30);
       

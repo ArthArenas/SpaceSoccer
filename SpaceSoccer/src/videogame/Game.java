@@ -393,7 +393,7 @@ public class Game implements Runnable{
             // render the elements of the game
             if(running){
                 if(paused){
-                     g.drawImage(Assets.pauseBackground, 0, 0, width, height, null);
+                     g.drawImage(Assets.pause, 0, 0, width, height, null);
                 }
                 else{
                     g.drawImage(Assets.background, 0, 0, width, height, null);
@@ -422,10 +422,10 @@ public class Game implements Runnable{
             else{
                 // render lose or win screen
                 if(enemies.size() == 0){
-                    // g.drawImage(Assets.winBackground, 0, 0, width, height, null);
+                    g.drawImage(Assets.win, 0, 0, width, height, null);
                 }
                 else{
-                    // g.drawImage(Assets.loseBackground, 0, 0, width, height, null);
+                    g.drawImage(Assets.lose, 0, 0, width, height, null);
                 }
             }
             bs.show();
