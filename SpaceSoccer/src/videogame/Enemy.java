@@ -101,6 +101,8 @@ public class Enemy extends Item{
     @Override
     public void tick() {
         this.animationEnemy.tick();
+        this.animationEnemy2.tick();
+        this.animationEnemy3.tick();
 
         if(getDirection() == 0){
             setY(getY() + 10);

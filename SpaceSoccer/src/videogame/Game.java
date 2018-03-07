@@ -145,9 +145,34 @@ public class Game implements Runnable {
          Enemy.setDirection(1);
          for (int i = 0; i < 10; i++) {
              for (int j = 0; j < 5; j++) {
-                 Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 , 
-                         j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 1, this);
-                 enemies.add(enemy);
+                 switch (j) {
+                     case 0:
+                         {
+                             Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 ,
+                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 3, this);
+                             enemies.add(enemy);
+                             break;
+                         }
+                     case 1:
+                     case 2:                         
+                         {
+                             Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 ,
+                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 2, this);
+                             enemies.add(enemy);
+                             break;
+                         }
+                     case 3:
+                     case 4:
+                         {
+                             Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 ,
+                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 1, this);
+                             enemies.add(enemy);
+                             break;
+                         }
+                     default:
+                         break;
+                 }
+                     
              }
          }
          display.getJframe().addKeyListener(keyManager);
