@@ -36,7 +36,6 @@ public class Player extends Item{
     @Override
     public void tick() {
         // moving bar depending on keys <-  ->
-        /*
         if (game.getKeyManager().left) {
            setX(getX() - 6);
         }
@@ -50,7 +49,6 @@ public class Player extends Item{
         else if (getX() <= 0) {
             setX(0);
         }
-        */
     }
 
     /**
@@ -59,6 +57,12 @@ public class Player extends Item{
      */
     @Override
     public void render(Graphics g) {
+<<<<<<< HEAD
          g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+=======
+        g.setColor(Color.red);
+        g.fillRect(getX(), getY(), getWidth(), getHeight());
+        //g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+>>>>>>> 1728f3688dd6b82c3bf4d4ad2a091103ebc25276
     }
 }

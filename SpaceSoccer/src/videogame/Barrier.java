@@ -5,6 +5,7 @@
  */
 package videogame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -61,6 +62,8 @@ public class Barrier extends Item{
      */
     @Override
     public void render(Graphics g) {
+        g.setColor(Color.pink);
+        g.fillRect(getX(), getY(), getWidth(), getHeight());
         // render depending on its power
         // g.drawImage(Assets.barrier, getX(), getY(), getWidth(), getHeight(), null);
     }

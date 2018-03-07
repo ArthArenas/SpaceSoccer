@@ -5,6 +5,7 @@
  */
 package videogame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -66,6 +67,8 @@ public class Bullet extends Item{
      */
     @Override
     public void render(Graphics g) {
+        g.setColor(Color.blue);
+        g.fillRect(getX(), getY(), getWidth(), getHeight());
         // render shifting between two costumes/versions
         // g.drawImage(Assets.bullet, getX(), getY(), getWidth(), getHeight(), null);
     }
