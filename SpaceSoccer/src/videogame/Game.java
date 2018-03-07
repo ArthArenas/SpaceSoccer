@@ -7,18 +7,20 @@ package videogame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javafx.util.Pair;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Arturo Arenas Esparza (A00820982)
  * @author Sergio Sanchez Martinez
  */
-public class Game implements Runnable {
+public class Game implements Runnable{
     private BufferStrategy bs;          // to have several buffers when displaying
     private Graphics g;                 // to paint objects
     private Display display;            // to display in the game
@@ -36,6 +38,7 @@ public class Game implements Runnable {
     private KeyManager keyManager;      // to manage the keyboard
     private int lives;                  // amount of lives left
     private int score;                  // score of the player
+    private TextLoader textloader;
     final private int LIVES;            // initial amount of lives
     // store pairs of IDs and times of activeness to represent active perks
     private ArrayList<Pair<Integer, Integer>> activePerks;
@@ -60,6 +63,7 @@ public class Game implements Runnable {
         running = false;
         death = false;
         keyManager = new KeyManager();
+        textloader = new TextLoader(0,0,this);
     }
     
     /**
@@ -157,6 +161,7 @@ public class Game implements Runnable {
          int width_enemy = height_enemy + 15;
          player = new Player(getWidth() / 2 - width_enemy / 2, getHeight() - 75, width_enemy, height_enemy, this);
          Enemy.setDirection(1);
+
          for (int i = 0; i < 10; i++) {
              for (int j = 0; j < 5; j++) {
                  switch (j) {
@@ -171,7 +176,7 @@ public class Game implements Runnable {
                      case 2:                         
                          {
                              Enemy enemy = new Enemy(i * (width_enemy + 30) + 120 ,
-                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 100, 2, false, this);
+                                     j * (height_enemy + 5) + 70 , width_enemy, height_enemy, 200, 2, false, this);
                              enemies.add(enemy);
                              break;
                          }
@@ -246,6 +251,10 @@ public class Game implements Runnable {
         return keyManager;
     }
     
+    public TextLoader getTextLoader(){
+        return textloader;
+    }
+    
     /**
      * Updates the elements of the game
      */
@@ -288,7 +297,7 @@ public class Game implements Runnable {
             }
             if (this.getKeyManager().space && !isBulletInTheAir()) {
                 bullets.add(new Bullet(this.player.getX() + this.player.getWidth() / 2 - 10,
-                    this.player.getY()-200, 20, 20, false, this));
+                    this.player.getY()-20, 20, 20, false, this));
             }
             // ticking the bullets
             for(int i = 0; i < bullets.size(); i++){
@@ -359,8 +368,7 @@ public class Game implements Runnable {
             }
         }
     }
-    
-    /**
+        /**
      * Paints the elements of the game
      */
     private void render() {
@@ -378,6 +386,8 @@ public class Game implements Runnable {
         else
         {
             g = bs.getDrawGraphics();
+            
+            
             // render the elements of the game
             if(running){
                 if(paused){
@@ -387,7 +397,11 @@ public class Game implements Runnable {
                     g.drawImage(Assets.background, 0, 0, width, height, null);
                     // render the player
                     //player.render(g);
+ 
                     player.render(g);
+                   
+                    textloader.render(g);
+                    
                     // render all the enemies
                     for(int i = 0; i < enemies.size(); i++){
                         enemies.get(i).render(g);
@@ -400,6 +414,7 @@ public class Game implements Runnable {
                     for(int i = 0; i < barriers.size(); i++){
                         barriers.get(i).render(g);
                     }
+
                 }
             }
             else{
